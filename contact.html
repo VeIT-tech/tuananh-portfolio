@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Work</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="skill.html">Skill</a></li>
+                <li><a href="notes.html">Notes</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="contact-section">
+        <h2>Contact</h2>
+        <div class="contact-container">
+            <div class="contact-item">
+                <span class="label">Email:</span>
+                <a href="mailto:lxtanh2001@gmail.com" id="emailLink" class="contact-link">lxtanh2001@gmail.com</a>
+            </div>
+
+            <div class="contact-item">
+                <span class="label">Facebook:</span>
+                <a href="https://web.facebook.com/sdt.0945857828?locale=vi_VN" target="_blank"
+                    class="fb-profile active-link">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/2023_Facebook_icon.svg" alt="FB"
+                        class="fb-icon">
+                    <span class="fb-name">Le Xuan Tuan Anh</span>
+                </a>
+            </div>
+
+            <div class="contact-item">
+                <span class="label">Phone:</span>
+                <a href="tel:+84945857828" class="contact-link active-link">+84 945 857 828</a>
+            </div>
+        </div>
+    </section>
+
+    <div id="chat-circle" class="chat-button">
+        <span class="chat-icon">💬</span>
+    </div>
+
+    <div class="chat-box" id="chat-box" style="display: none;">
+        <div class="chat-box-header">
+            <img src="https://ui-avatars.com/api/?name=Tuan+Anh&background=7fffd4&color=0a0c10" alt="Avatar">
+            <span>Ask about my journey</span>
+            <button id="chat-box-toggle">✕</button>
+        </div>
+        <div class="chat-box-body" id="chat-content">
+            <div class="chat-msg bot">Hi! I'm Tuan Anh. Feel free to ask me anything about my career change!</div>
+        </div>
+        <div class="chat-box-options" id="chat-options">
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('emailLink').addEventListener('click', function (e) {
+            window.location.href = "mailto:lxtanh2001@gmail.com";
+        });
+        const chatData = [
+            {
+                q: "Why did you study Veterinary despite not liking it?",
+                a: "At that time, I didn't think it through. I followed my family's tradition and suggestions, believing it was a high-income field."
+            },
+            {
+                q: "Is the salary in Veterinary actually high?",
+                a: "Yes! Pet clinic vets earn 14-16M VND/month. Farm technicians can earn 20-24M VND. Research labs pay around 8-11M VND."
+            },
+            {
+                q: "Is the Vietnamese IT market easy?",
+                a: "It's much tougher than Veterinary. IT requires long-term specialized training and high-quality talent from the start."
+            },
+            {
+                q: "Is the IT industry currently saturated?",
+                a: "No, it's hungry for high-quality talent. However, the entry bar is high, and new graduates struggle if they lack solid skills."
+            },
+            {
+                q: "Any regrets leaving a stable career?",
+                a: "Absolutely not. My goal is to conquer new challenges and keep learning. I'm happy with my choice!"
+            }
+        ];
+        const chatBox = document.getElementById('chat-box');
+        const chatContent = document.getElementById('chat-content');
+        const chatOptions = document.getElementById('chat-options');
+        document.getElementById('chat-circle').onclick = () => {
+            chatBox.style.display = chatBox.style.display === 'none' ? 'flex' : 'none';
+        };
+        document.getElementById('chat-box-toggle').onclick = () => {
+            chatBox.style.display = 'none';
+        };
+        function showOptions() {
+            chatOptions.innerHTML = '';
+            chatData.forEach((item) => {
+                const btn = document.createElement('button');
+                btn.innerText = item.q;
+                btn.className = 'opt-btn';
+                btn.onclick = () => handleChat(item.q, item.a);
+                chatOptions.appendChild(btn);
+            });
+        }
+
+        function handleChat(question, answer) {
+            chatContent.innerHTML += `<div class="chat-msg user">${question}</div>`;
+            chatContent.scrollTop = chatContent.scrollHeight;
+
+            setTimeout(() => {
+                chatContent.innerHTML += `<div class="chat-msg bot">${answer}</div>`;
+                chatContent.scrollTop = chatContent.scrollHeight;
+            }, 600);
+        }
+
+        showOptions();
+    </script>
+</body>
+
+</html>
